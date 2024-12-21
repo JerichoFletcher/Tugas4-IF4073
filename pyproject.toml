@@ -1,0 +1,22 @@
+[project]
+name = "tugas4-if4073"
+version = "0.1"
+dependencies = [
+    "PyQt5",
+    "opencv-python",
+    "transformers",
+    "transformers[torch]",
+    "torchvision",
+    "tensorboardX",
+    "datasets",
+    "evaluate",
+    "pillow",
+    "tqdm",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -8,6 +8,8 @@ from PyQt5.QtGui import QPixmap, QImage
 import cv2
 import numpy as np
 
+from deep_learning import DeepLearningProcessor
+
 class ImageProcessor(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -54,6 +56,9 @@ class ImageProcessor(QMainWindow):
         # State
         self.input_image = None
 
+        # Modules
+        self.module_deep_learning = DeepLearningProcessor()
+
     def load_input_image(self):
         file_path, _ = QFileDialog.getOpenFileName(self, "Open Image", "", "Image Files (*.png *.jpg *.bmp)")
         if file_path:
@@ -95,8 +100,8 @@ class ImageProcessor(QMainWindow):
         return image
 
     def deep_learning_processing(self, image):
-        # TODO: import deep learning function
-        return image
+        result = self.module_deep_learning.process(image)
+        return result
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
