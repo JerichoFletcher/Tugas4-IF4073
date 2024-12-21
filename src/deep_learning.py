@@ -7,6 +7,7 @@ label_texts = ['Ambulance', 'Bus', 'Car', 'Motorcycle', 'Truck']
 
 class DeepLearningProcessor:
     def __init__(self):
+        # Load feature extractor and pre-trained model
         self._proc = OwlViTProcessor.from_pretrained(model_path)        
         self._model = OwlViTForObjectDetection.from_pretrained(
             model_path,
@@ -14,15 +15,17 @@ class DeepLearningProcessor:
         )
 
     def process(self, img_in: cv2.typing.MatLike):
-        img_out = img_in.copy()
-
+        # Send input image to model
         inp = self._proc(text=label_texts, images=img_in, return_tensors='pt')
         out = self._model(**inp)
 
-        h, w, c = img_in.shape
+        # Thresholding and bounding box denormalization
+        h, w, _ = img_in.shape
         target_sizes = [(h, w)]
         res = self._proc.post_process_object_detection(outputs=out, threshold=0.1, target_sizes=target_sizes)
 
+        # Draw bounding box for detected objects on output image
+        img_out = img_in.copy()
         labels, boxes = res[0]['labels'], res[0]['boxes']
         for label_idx, box in zip(labels, boxes):
             label_text = label_texts[label_idx]
