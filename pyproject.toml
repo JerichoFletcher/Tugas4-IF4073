@@ -6,7 +6,7 @@ dependencies = [
     "opencv-python",
     "transformers",
     "transformers[torch]",
-    "matplotlib",
+    "scikit-image",
 ]
 
 [build-system]

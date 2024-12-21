@@ -3,7 +3,6 @@ import torch
 import cv2
 
 model_path = 'google/owlvit-base-patch16'
-
 label_texts = ['Ambulance', 'Bus', 'Car', 'Motorcycle', 'Truck']
 
 class DeepLearningProcessor:

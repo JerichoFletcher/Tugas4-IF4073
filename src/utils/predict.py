@@ -1,11 +1,9 @@
-import cv2
 from utils.segment_image import segment_image
 from utils.extract_features import extract_features
 from utils.visualize_bboxes import visualize_bboxes
-import matplotlib.pyplot as plt
 
 import joblib
-model = joblib.load("utils/svm_vehicle_detection_model.pkl")
+model = joblib.load("models/svm_vehicle_detection_model.pkl")
 
 def predict(img):
     class_names = ['Ambulance', 'Bus', 'Car', 'Motorcycle', 'Truck']
