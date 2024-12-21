@@ -79,12 +79,14 @@ class ImageProcessor(QMainWindow):
             return
 
         # Convert output_image to QPixmap and display it
-        height, width, channel = output_image.shape
+        output_image_rgb = cv2.cvtColor(output_image, cv2.COLOR_BGR2RGB)
+
+        # Convert output_image to QPixmap and display it
+        height, width, channel = output_image_rgb.shape
         bytes_per_line = 3 * width
-        q_image = QPixmap.fromImage(
-            QImage(output_image.data, width, height, bytes_per_line, QImage.Format_RGB888)
-        )
-        self.output_label.setPixmap(q_image.scaled(
+        q_image = QImage(output_image_rgb.data, width, height, bytes_per_line, QImage.Format_RGB888)
+        pixmap = QPixmap.fromImage(q_image)
+        self.output_label.setPixmap(pixmap.scaled(
             self.output_label.width(), self.output_label.height(), Qt.KeepAspectRatio
         ))
 
