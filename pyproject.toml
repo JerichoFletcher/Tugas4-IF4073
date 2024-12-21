@@ -6,12 +6,6 @@ dependencies = [
     "opencv-python",
     "transformers",
     "transformers[torch]",
-    "torchvision",
-    "tensorboardX",
-    "datasets",
-    "evaluate",
-    "pillow",
-    "tqdm",
 ]
 
 [build-system]

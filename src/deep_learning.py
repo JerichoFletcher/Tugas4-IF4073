@@ -1,6 +1,5 @@
 from transformers import OwlViTProcessor, OwlViTForObjectDetection
 import torch
-import numpy as np
 import cv2
 
 model_path = 'google/owlvit-base-patch16'
