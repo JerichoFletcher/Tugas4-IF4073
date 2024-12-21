@@ -1,10 +1,9 @@
 import cv2
 import numpy as np
 
-def segment_image(image_path):
+def segment_image(img):
     #Reference: https://www.analyticsvidhya.com/blog/2021/09/image-segmentation-algorithms-with-implementation-in-python/
     
-    img = cv2.imread(image_path)
     b, g, r = cv2.split(img)
     rgb_img = cv2.merge([r, g, b])  # Convert BGR to RGB for display
 
@@ -36,10 +35,6 @@ def segment_image(image_path):
     # Add one to all labels so that sure background is not 0, but 1
     markers = markers + 1
     markers[unknown == 255] = 0
-
-    # Watershed algorithm
-    markers = cv2.watershed(img, markers)
-    img[markers == -1] = [255, 0, 0]  # Mark the boundaries
 
     # Extract the segmented image using the threshold mask
     segmented_image = img.copy()  # Start with a copy of the original image

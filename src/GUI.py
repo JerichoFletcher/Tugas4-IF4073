@@ -5,10 +5,13 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap, QImage
+
+from utils import predict
+
 import cv2
 import numpy as np
 
-from deep_learning import DeepLearningProcessor
+# from deep_learning import DeepLearningProcessor
 
 class ImageProcessor(QMainWindow):
     def __init__(self):
@@ -57,7 +60,7 @@ class ImageProcessor(QMainWindow):
         self.input_image = None
 
         # Modules
-        self.module_deep_learning = DeepLearningProcessor()
+        # self.module_deep_learning = DeepLearningProcessor()
 
     def load_input_image(self):
         file_path, _ = QFileDialog.getOpenFileName(self, "Open Image", "", "Image Files (*.png *.jpg *.bmp)")
@@ -96,8 +99,8 @@ class ImageProcessor(QMainWindow):
         ))
 
     def conventional_processing(self, image):
-        # TODO: import conventional function
-        return image
+        result = predict.predict(image)
+        return result
 
     def deep_learning_processing(self, image):
         result = self.module_deep_learning.process(image)
